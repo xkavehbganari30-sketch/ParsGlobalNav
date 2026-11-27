@@ -10,184 +10,309 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- پنل شناور بالا: جستجوی صوتی و انتخاب وسیله نقلیه -->
+    <!-- پنل بالای صفحه: جستجوی صوتی + کارت بزرگ دستور پیچ بعدی -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:background="#EE161B22"
-        android:elevation="8dp"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <!-- نوار جستجو -->
+        <LinearLayout
+            android:id="@+id/searchPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EE161B22"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnVoiceSearch"
+                    android:layout_width="48dp"
+                    android:layout_height="44dp"
+                    android:backgroundTint="#00C853"
+                    android:text="🎤"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="#21262D"
+                    android:hint="مقصد را بگویید یا بنویسید..."
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8B949E"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btnSearchGo"
+                    android:layout_width="48dp"
+                    android:layout_height="44dp"
+                    android:backgroundTint="#1F6FEB"
+                    android:text="🔍"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- انتخاب وسیله نقلیه -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnModeCar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:backgroundTint="#1F6FEB"
+                        android:text="🚗 خودرو"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp" />
+
+                    <Button
+                        android:id="@+id/btnModeMoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="5dp"
+                        android:backgroundTint="#21262D"
+                        android:text="🏍️ موتور"
+                        android:textColor="#C9D1D9"
+                        android:textSize="11sp" />
+
+                    <Button
+                        android:id="@+id/btnModeBike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="5dp"
+                        android:backgroundTint="#21262D"
+                        android:text="🚲 دوچرخه"
+                        android:textColor="#C9D1D9"
+                        android:textSize="11sp" />
+
+                    <Button
+                        android:id="@+id/btnModeWalk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="5dp"
+                        android:backgroundTint="#21262D"
+                        android:text="🚶 پیاده"
+                        android:textColor="#C9D1D9"
+                        android:textSize="11sp" />
+
+                    <Button
+                        android:id="@+id/btnModeTransit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="5dp"
+                        android:backgroundTint="#21262D"
+                        android:text="🚌 عمومی"
+                        android:textColor="#C9D1D9"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- بنر زنده هدایت در پیچ‌ها (Turn-by-Turn) -->
+        <LinearLayout
+            android:id="@+id/turnBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#F20D47A1"
+            android:elevation="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvTurnIcon"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:background="#1565C0"
+                android:gravity="center"
+                android:text="⬆️"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTurnDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="۲۰۰ متر جلوتر"
+                    android:textColor="#00FF9C"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTurnText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="مستقیم ادامه دهید"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- سرعت‌سنج زنده -->
+            <LinearLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="#161B22"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#00FF9C"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="km/h"
+                    android:textColor="#8B949E"
+                    android:textSize="9sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- داشبورد پایین صفحه: نوار پیشرفت مسیر + ETA + دکمه‌های هوشمند -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:background="#F2161B22"
+        android:elevation="10dp"
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- نوار جستجو و دکمه میکروفون -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnVoiceSearch"
-                android:layout_width="52dp"
-                android:layout_height="48dp"
-                android:backgroundTint="#00C853"
-                android:text="🎤"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/etSearch"
+            <TextView
+                android:id="@+id/tvStatus"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#21262D"
-                android:hint="نام مقصد را بگویید یا بنویسید..."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#8B949E"
-                android:textSize="14sp" />
+                android:text="آماده | مقصد را انتخاب کنید"
+                android:textColor="#58A6FF"
+                android:textSize="11sp" />
 
-            <Button
-                android:id="@+id/btnSearchGo"
-                android:layout_width="52dp"
-                android:layout_height="48dp"
-                android:backgroundTint="#1F6FEB"
-                android:text="🔍"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <!-- نوار انتخاب نوع وسیله نقلیه -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:scrollbars="none">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvEtaBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnModeCar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:backgroundTint="#1F6FEB"
-                    android:text="🚗 خودرو"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btnModeMoto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="6dp"
-                    android:backgroundTint="#21262D"
-                    android:text="🏍️ موتور"
-                    android:textColor="#C9D1D9"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btnModeBike"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="6dp"
-                    android:backgroundTint="#21262D"
-                    android:text="🚲 دوچرخه"
-                    android:textColor="#C9D1D9"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btnModeWalk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="6dp"
-                    android:backgroundTint="#21262D"
-                    android:text="🚶 پیاده"
-                    android:textColor="#C9D1D9"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btnModeTransit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="6dp"
-                    android:backgroundTint="#21262D"
-                    android:text="🚌 عمومی"
-                    android:textColor="#C9D1D9"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
-
-    <!-- پنل شناور پایین: اطلاعات مسیر و ابزارهای کمکی -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="12dp"
-        android:background="#EE161B22"
-        android:elevation="8dp"
-        android:orientation="vertical"
-        android:padding="14dp">
-
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="آماده | دکمه 🎤 را بزنید یا روی نقشه لمس کنید"
-            android:textColor="#58A6FF"
-            android:textSize="12sp" />
+                android:background="#238636"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="2dp"
+                android:text="رسیدن: --:--"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvInstruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="مقصد را انتخاب کنید (ایران و کل جهان)"
+            android:text="مسیریابی هوشمند (ایران و کل جهان)"
             android:textColor="#00FF9C"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
+        <!-- نوار پیشرفت سفر -->
+        <ProgressBar
+            android:id="@+id/routeProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="6dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#00FF9C" />
+
+        <!-- دکمه‌های کنترلی -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnVoicePersona"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1.2"
+                android:backgroundTint="#6E40C9"
+                android:text="🎙️ لحن: صمیمی"
+                android:textSize="11sp" />
 
             <Button
                 android:id="@+id/btnLang"
                 android:layout_width="0dp"
-                android:layout_height="42dp"
-                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0.9"
                 android:backgroundTint="#30363D"
                 android:text="🌐 فارسی"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
             <Button
                 android:id="@+id/btnHud"
                 android:layout_width="0dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0.8"
                 android:backgroundTint="#30363D"
                 android:text="🚘 HUD"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
             <Button
                 android:id="@+id/btnMyLoc"
                 android:layout_width="0dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1.1"
                 android:backgroundTint="#238636"
-                android:text="📍 مکان من"
-                android:textSize="12sp" />
+                android:text="🧭 تعقیب 3D"
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
