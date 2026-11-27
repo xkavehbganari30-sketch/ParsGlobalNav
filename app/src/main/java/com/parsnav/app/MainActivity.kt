@@ -373,7 +373,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener, LocationL
             } catch (_: Exception) {}
         }
     }
-    }
 
     private fun toggleHudMode(enable: Boolean) {
         isHudMode = enable
@@ -635,3 +634,4 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener, LocationL
     override fun onPause() { super.onPause(); mapView.onPause() }
     override fun onStop() { super.onStop(); mapView.onStop() }
     override fun onDestroy() { locationManager.removeUpdates(this); tts.shutdown(); mapView.onDestroy(); super.onDestroy() }
+}
